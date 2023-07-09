@@ -1,0 +1,20 @@
+Kas yra asembleris?
+
+yasm programų pavyzdžiai
+makrosai
+call instrukcijos
+pagalbinė binlioteka
+stekas ir push/pop instrukcijos
+    parametrų perdavimas per registrus
+    parametrų perdavimas  per steką
+    SP ir BP registrai
+    adresavimas steko segmente   
+    steko _viršūnės_ rezervavimas
+    funkcijų parametrų perdavimas naudojant steką ...right-to-left order, „pagal reikšmę ir pagal nuorodą“
+Darbas su failais.     
+Glaustoji apžvalga apie tai, kaip skaityti/rašyti failus
+Pavyzdys: dizasemblerio pradžia
+    
+
+
+

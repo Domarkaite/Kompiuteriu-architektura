@@ -1,0 +1,56 @@
+	; Atidaromas failas  ;paimti dailo varda is ES:DX mainly dx ir pushinti??
+	mov al, 0x0
+	mov dx, 0x82
+	mov ah, 0x3d
+	int 0x21
+
+	; Skaitomas failas  ;;basic shit
+	mov bx, ax
+	push bx
+	mov cx, 0xffff
+	mov dx, Buferis
+	mov ah, 0x3f
+	int 0x21
+	mov bx, ax
+
+	; Paimamas failo vardas
+	mov dx, Vardas
+	mov al, 0xff
+	call procGetStr
+
+	; Atidaromas/kuriamas failas rasymui
+	mov cx, 1
+	mov ah, 0x3c
+	int 0x21
+	mov bx, ax
+
+	mov si, 0x0 ;;skaitosi pirmoji, saugosi, po to skaitant is ah galima kazkaip permest i output??
+	.pirmojiEilute
+	cmp bx, si
+	jz .pab      ; tikrina ar dar ne failo pabaiga
+	mov ah, [Buferis + si]
+	inc si
+	cmp ah, 0x0a
+	jnz .pirmojiEilute
+
+	; Uzdaromas failas
+	.pab
+	pop bx
+	mov ah, 0x3e
+	int 0x21
+
+	; Uzdaromas failas
+	mov ah, 0x3e
+	int 0x21
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+%include 'yasmlib.asm'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	section .data
+
+	Buferis:
+		times 10000 db 0x00
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+section .bss                    ; neinicializuoti duomenys  
